@@ -220,7 +220,7 @@ inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 set selectmode=mouse,key
 set selection=exclusive
-set mouse=n "可视模式下使用鼠标，set mouse=a这个命令导致在vim下复制粘贴不好用
+set mouse-=a "可视模式下使用鼠标，set mouse=a这个命令导致在vim下复制粘贴不好用
 set ai "vim中复制粘贴保存格式
 set ignorecase "设置默认大小写不敏感查找
 set smartcase "如果有大小写字母，则切换到大小写敏感查找
