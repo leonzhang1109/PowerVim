@@ -28,11 +28,21 @@ set cinoptions=g-1
 "else
 "  set backup		" keep a backup file
 "endif
+"修改文件自动备份
 set nobackup        "I hate backup files.
-set number
-set history=50		" keep 50 lines of command line history
+"Automatically removing all trailing whitespace for specific file type
+autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+"显示行号
+set number "或者set  nu
+"映射F5显示行号，参考"vim 按键映射"（http://www.pythonclub.org/vim/map-basic）
+"map <F5> <Esc>:set nu<CR>
+"映射Ctrl+F5为不显示行号
+"map <C-@><F5> <Esc>:set nonu<CR>
+nmap <silent> <F5> :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
+set history=1000		" keep 1000 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
+"快速匹配
 set incsearch		" do incremental searching
 "设置非兼容模式
 set nocp
@@ -43,12 +53,19 @@ set langmenu=zh_CN.gb2312
 language message zh_CN.gb2312
 
 set fileencoding=gbk2312
-set ts=4
-set sw=4
+"tab显示为4个空格的宽度
+set tabstop=4 "或者 set ts=4
+"当前行之间交错时使用4个空格
+set shiftwidth=4 "或者 set sw=4"
+"按tab键的时候，插入4个空格
+set expandtab
 set smartindent
+"设置匹配模式，输入做括号会出现右括号
 set showmatch        " Show matching brackets.
 set guioptions-=T
-set expandtab
+
+"粘贴插入
+set paste
 
 let curpwd = getcwd()
 " vim自身命令行模式智能补全
@@ -213,11 +230,12 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 
+"编辑时显示光标状态
 set ruler           " 显示标尺"
 autocmd InsertEnter * se cul    " 用浅色高亮当前行"
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
 
-" :colorscheme desert     " 设置主题
+colorscheme desert     " 设置主题
 " vim-commentary style set 注释针对不同语言的注释方法
 autocmd FileType cpp set commentstring=//\ %s
 autocmd FileType php set commentstring=//\ %s
@@ -313,7 +331,7 @@ endfunc
 " Hello，我是PowerVim的作者，程序员Carl，欢迎关注我的微信公众号：代码随想录 
 
 " 使用的背景主题
-colorscheme Monokai_Gavin
+" colorscheme Monokai_Gavin
 " 添加自动补全字典
 au FileType php setlocal dict+=~/.vim/dictionary/php_keywords_list.txt
 au FileType cpp setlocal dict+=~/.vim/dictionary/cpp_keywords_list.txt
@@ -337,7 +355,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " test
-" 自动已当前文件为根目录，可能会影响使用:Vex的，我在mac是ok的，但是在centos下:Vex功能错乱了
+" 自动以当前文件为根目录，可能会影响使用:Vex的，我在mac是ok的，但是在centos下:Vex功能错乱了
 " set autochdir
 autocmd BufEnter * silent! lcd %:p:h
 " 需要在哪个目录有类函数补全功能，就加载哪个目录的tags 
