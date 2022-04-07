@@ -65,7 +65,7 @@ set showmatch        " Show matching brackets.
 set guioptions-=T
 
 "粘贴插入
-set paste
+"set paste
 
 let curpwd = getcwd()
 " vim自身命令行模式智能补全
@@ -178,10 +178,27 @@ filetype indent on
 " set completeopt=longest,menu
 
 "cs add $curpwd/cscope.out $curpwd/
-let g:SuperTabRetainCompletionType=2
-let g:SuperTabDefaultCompletionType="<C-X><C-O>"
-set cscopequickfix=s-,c-,d-,i-,t-,e-
+"let g:SuperTabRetainCompletionType=2
+"let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
 
+" set gtags
+set cscopetag " 使用 cscope 作为 tags 命令
+set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
+"gtags.vim 设置项
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+
+if filereadable("/usr/local/bin/gtags-cscope")
+    set csprg=/usr/local/bin/gtags-cscope
+	if filereadable("GTAGS")
+		cscope reset
+		cscope kill 0
+		cscope add GTAGS $PWD
+		cscope add GRTAGS $PWD
+	endif
+endif
 
 " VIM支持多种文本折叠方式，我VIM多用于编码，所以选择符合编程语言语法的代码折叠方式。
 " set foldmethod=syntax
@@ -189,7 +206,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 set nofen
 
 let cwd=""
-set tags=tags
+"set tags=tags
 "cs add cscope.out 
 let g:miniBufExplMapWindowNavArrows = 1
 "允许光标在任何位置时用CTRL-TAB遍历buffer
@@ -268,8 +285,8 @@ func SetTitle()
     if &filetype == 'sh'
         call setline(1,"\#########################################################################")
         call append(line("."),   "\# File Name:    ".expand("%"))
-        call append(line(".")+1, "\# Author:       程序员Carl")
-        call append(line(".")+2, "\# mail:         programmercarl@163.com")
+        call append(line(".")+1, "\# Author:       Leon Zhang")
+        call append(line(".")+2, "\# mail:         lzhang1109@yahoo.com")
         call append(line(".")+3, "\# Created Time: ".strftime("%c"))
         call append(line(".")+4, "\#########################################################################")
         call append(line(".")+5, "\#!/bin/bash")
@@ -277,8 +294,8 @@ func SetTitle()
     else
         call setline(1, "/* ************************************************************************")
         call append(line("."),   "> File Name:     ".expand("%"))
-        call append(line(".")+1, "> Author:        程序员Carl")
-        call append(line(".")+2, "> 微信公众号:    代码随想录")
+        call append(line(".")+1, "> Author:        Leon Zhang")
+        call append(line(".")+2, "> mail:          lzhang1109@yahoo.com")
         call append(line(".")+3, "> Created Time:  ".strftime("%c"))
         call append(line(".")+4, "> Description:   ")
         call append(line(".")+5, " ************************************************************************/")
@@ -455,3 +472,4 @@ function! GenMarkdownSectionNum()
   " echo lvl sect out
   echo out
 endfunc
+
