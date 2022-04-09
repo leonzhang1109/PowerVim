@@ -47,12 +47,12 @@ set incsearch		" do incremental searching
 "设置非兼容模式
 set nocp
 
-"set encoding=utf-8
-""set encoding=gb2312
-set langmenu=zh_CN.gb2312
-language message zh_CN.gb2312
+set encoding=utf-8
+"set encoding=gb2312
+"set langmenu=zh_CN.gb2312
+"language message zh_CN.gb2312
 
-set fileencoding=gbk2312
+"set fileencoding=gbk2312
 "tab显示为4个空格的宽度
 set tabstop=4 "或者 set ts=4
 "当前行之间交错时使用4个空格
@@ -143,7 +143,7 @@ nmap <Leader>t :Tab /
 "                  signatures (S) information.
 "--extra=+q      : Adds context to the tag name. Note: Without this
 "                  option, the script cannot get class members.
-nmap<leader>tg :!ctags -R --fields=+aS --extra=+q<CR>
+nmap<leader>tg :!ctags -R --fields=+aS --extras=+q<CR>
 " java jdk 补全
 map! <C-O> <C-X><C-O>
 " 使用NERDTree插件查看工程文件。设置快捷键
